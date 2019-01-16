@@ -2,25 +2,29 @@
 <html>
 <head>
     <title></title>
-    {{#each css}}
-        <link rel="stylesheet" href="/css/{{this}}">
-    {{/each}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+<div>
 
-<h1>We testin</h1>
-
-<div id="container">
+</div>
 <div id="left">
     {{#each burgers}}
+    {{#unless this.devoured}}
     <div class="burger">
-        <p>{{this.id}}. {{this.burger_name}}</p>
+        <p class="burger-name" data-id="{{this.id}}" data-name="{{this.burger_name}}">{{this.id}}. {{this.burger_name}}</p>
         <button class="eat-button">Devour It!</button>
-    </div>
+    </div>  
+    {{/unless}}  
     {{/each}}
 </div>
 <div id="right">
-
+    {{#each burgers}}
+    {{#if this.devoured}}
+    <div class="burger">
+        <p class="burger-eaten" data-id="{{this.id}}" data-name="{{this.burger_name}}">{{this.id}}. {{this.burger_name}}</p>
+    </div>  
+    {{/if}}  
+    {{/each}}
 </div>
 </div>
 <div id="input-area">
@@ -40,7 +44,13 @@
             location.reload();
         });
     });
-    $("#eat-button").on("click", function() {
+    $(".eat-button").on("click", function() {
+        var burger = {
+            id: $(this).prev().attr("data-id"),
+            burger_name: $(this).prev().attr("data-name"),
+            devoured: false
+        }
+        console.log("We're trying to update: " + burger);
         $.put("/api/burgers", burger).then(function(data) {
             location.reload();
         });

@@ -63,6 +63,7 @@ module.exports = function(app) {
       }
     })
       .then(function(dbBurger) {
+        console.log("We tried to update");
         res.json(dbBurger);
       });
 
