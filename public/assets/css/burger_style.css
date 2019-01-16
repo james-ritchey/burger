@@ -10,17 +10,23 @@ h1 {
     display: block;
     width: 90%;
     margin: auto;
+    margin-bottom: 1em;
+    height: 100%;
+    padding: 0.5em;
 }
 
 #left{
     display: inline-block;
     width: 60%;
+    margin-bottom: 0.5em;
 }
 
 #right {
     display: inline-block;
     width: 40%;
     float: right;
+    margin-bottom: 0.5em;
+
 }
 
 button {
@@ -52,6 +58,7 @@ p {
     display: block;
     width: 100%;
     margin-right: 0px;
+    color: grey;
 }
 
 #input-area {
@@ -81,3 +88,4 @@ img {
 #burger-submit {
     width: 100%;
 }
+

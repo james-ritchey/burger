@@ -4,28 +4,26 @@
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-<div>
-
-</div>
-<div id="left">
-    {{#each burgers}}
-    {{#unless this.devoured}}
-    <div class="burger">
-        <p class="burger-name" data-id="{{this.id}}" data-name="{{this.burger_name}}">{{this.id}}. {{this.burger_name}}</p>
-        <button class="eat-button">Devour It!</button>
-    </div>  
-    {{/unless}}  
-    {{/each}}
-</div>
-<div id="right">
-    {{#each burgers}}
-    {{#if this.devoured}}
-    <div class="burger">
-        <p class="burger-eaten" data-id="{{this.id}}" data-name="{{this.burger_name}}">{{this.id}}. {{this.burger_name}}</p>
-    </div>  
-    {{/if}}  
-    {{/each}}
-</div>
+<div id="container">
+    <div id="left">
+        {{#each burgers}}
+        {{#unless this.devoured}}
+        <div class="burger">
+            <p class="burger-name" data-id="{{this.id}}" data-name="{{this.burger_name}}">{{this.id}}. {{this.burger_name}}</p>
+            <button class="eat-button">Devour It!</button>
+        </div>  
+        {{/unless}}  
+        {{/each}}
+    </div>
+    <div id="right">
+        {{#each burgers}}
+        {{#if this.devoured}}
+        <div class="burger">
+            <p class="burger-eaten" data-id="{{this.id}}" data-name="{{this.burger_name}}">{{this.id}}. {{this.burger_name}}</p>
+        </div>  
+        {{/if}}  
+        {{/each}}
+    </div>
 </div>
 <div id="input-area">
     <input type="text" id="burger-input">
@@ -48,11 +46,18 @@
         var burger = {
             id: $(this).prev().attr("data-id"),
             burger_name: $(this).prev().attr("data-name"),
-            devoured: false
+            devoured: true
         }
         console.log("We're trying to update: " + burger);
-        $.put("/api/burgers", burger).then(function(data) {
-            location.reload();
-        });
+        $.ajax({
+            url: '/api/burgers',
+            type: 'PUT',
+            data: burger,
+            success: function(result) {
+                // Do something with the result
+                console.log("we PUT");
+                location.reload();
+            }
+});
     });
 </script>
