@@ -40,4 +40,9 @@
             location.reload();
         });
     });
+    $("#eat-button").on("click", function() {
+        $.put("/api/burgers", burger).then(function(data) {
+            location.reload();
+        });
+    });
 </script>
