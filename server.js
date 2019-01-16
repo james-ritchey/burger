@@ -5,6 +5,7 @@
 // *** Dependencies
 // =============================================================
 var express = require("express");
+var path = require("path");
 
 // Sets up the Express App
 // =============================================================
@@ -20,6 +21,8 @@ app.use(express.json());
 
 // Static directory
 app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, '/public')));
+
 // Set Handlebars.
 var exphbs = require("express-handlebars");
 

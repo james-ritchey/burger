@@ -1,8 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    {{#each css}}
+        <link rel="stylesheet" href="/css/{{this}}">
+    {{/each}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
 <h1>We testin</h1>
 
-{{#each burgers}}
-<div>
-    <h2>{{this.burger_name}}</h2>
-    <h4>{{this.devoured}}</h4>
+<div id="container">
+<div id="left">
+    {{#each burgers}}
+    <div class="burger">
+        <p>{{this.id}}. {{this.burger_name}}</p>
+        <button class="eat-button">Devour It!</button>
+    </div>
+    {{/each}}
 </div>
-{{/each}}
+<div id="right">
+
+</div>
+</div>
+<div id="input-area">
+    <input type="text" id="burger-input">
+    <button type="button" id="burger-submit">Submit</button>
+</div>
+
+</html>
+
+<script>
+    $("#burger-submit").on("click", function() {
+        var burger = {
+            burger_name: $("#burger-input").val(),
+            devoured: false
+        }
+        $.post("/api/burgers", burger).then(function(data) {
+            location.reload();
+        });
+    });
+</script>
